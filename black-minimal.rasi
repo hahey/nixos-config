@@ -1,0 +1,104 @@
+* {
+  accent:                         #fb8c00;
+  background:                     #1d1f28;
+  background-light:               #e0e0e0;
+  foreground:                     #ff5555;
+  on:                             #66bb6a;
+  off:                            #ef5350;
+}
+#window {
+  transparency:                   "real";
+  border-color:                   @foreground;
+  border:                         2px;
+  width:                          170px;
+  x-offset:                       +0px;
+  y-offset:                       +32px;
+  background-color:               @background;
+  children:                       [ mainbox ];
+}
+#mainbox {
+  background-color:               @background;
+  children:                       [ inputbar, listview ];
+  spacing:                        12px;
+  margin:                         12px;
+}
+#inputbar {
+  children:                       [ prompt, entry ];
+  spacing:                        10px;
+  background-color:               @background;
+  text-color:                     @foreground;
+  expand:                         false;
+  border:                         0px;
+  border-radius:                  0px;
+  border-color:                   @accent;
+  margin:                         0px 0px 0px 0px;
+  padding:                        0px;
+}
+#listview {
+  background-color:               @background;
+  columns:                        1;
+  lines:                          5;
+  spacing:                        12px;
+  cycle:                          true;
+  dynamic:                        true;
+  layout:                         vertical;
+}
+#prompt{
+  padding:                        3px;
+  background-color:               @background;
+  text-color:                     @foreground;
+  border:                         2px 2px 2px 2px;
+  border-radius:                  10px;
+  border-color:                   @foreground;
+}
+#entry {
+  padding:                        3px;
+  background-color:               @background;
+  text-color:                     @accent;
+  border-color:                   @foreground;
+  border:                         0px 0px 1px 0px;
+  expand:                         true;
+}
+#element {
+  background-color:               @background;
+  text-color:                     @background-light;
+  orientation:                    horizontal;
+  border-radius:                  12px;
+  padding:                        5px 10px 5px 10px;
+}
+#element-text {
+  font:                           "FantasqueSansMono Nerd Font Mono 20";
+  expand:                         true;
+  horizontal-align:               0.5;
+  vertical-align:                 0;
+}
+#element normal.urgent,
+element alternate.urgent {
+  background-color:               @off;
+  text-color:                     @background;
+  border-radius:                  12px;
+}
+
+#element normal.active,
+element alternate.active {
+    background-color:             @on;
+    text-color:                   @background;
+}
+
+#element selected {
+    background-color:             @background;
+    text-color:                   @background-light;
+    border:                       0px 0px 0px 2px;
+    border-radius:                0px;
+    border-color:                 @accent;
+}
+
+#element selected.urgent {
+    background-color:             @on;
+    text-color:                   @background;
+}
+
+#element selected.active {
+    background-color:             @off;
+    color:                        @background;
+}
