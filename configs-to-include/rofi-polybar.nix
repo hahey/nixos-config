@@ -251,7 +251,7 @@ in
      killall -q polybar
      while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-     PATH=/home/$USER/.nix-profile/bin/:/run/current-system/sw/bin/:$PATH polybar -r base &
+     PATH=/home/$USER/.nix-profile/bin/:/run/current-system/sw/bin:$PATH polybar -r base &
      '';
   };
 }

@@ -7,7 +7,7 @@
   nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
 
-  fonts.fontconfig.enable = true; # somehow it does not work properly now
+  fonts.fontconfig.enable = true;
 
   services.gpg-agent = {
     enable = true;

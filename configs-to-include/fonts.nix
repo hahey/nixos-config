@@ -2,7 +2,7 @@
 { config, pkgs, ... }:
 
 {
-  fonts.fonts = with pkgs; [
+  home.packages = with pkgs; [
     # wm
     font-awesome-ttf
     powerline-fonts
