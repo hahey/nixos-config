@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./fonts.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -90,21 +91,6 @@
   nix.allowedUsers = [ "@wheel" ];
 
   environment.systemPackages = [ pkgs.home-manager ];
-
-  fonts.fonts = with pkgs; [
-    # wm
-    font-awesome-ttf
-    powerline-fonts
-    siji
-    iosevka
-    terminus_font_ttf
-    (nerdfonts.override { fonts = [ "Iosevka" "FantasqueSansMono" ]; })
-    comfortaa
-
-    # korean
-    nanum-gothic-coding
-    noto-fonts-cjk
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
