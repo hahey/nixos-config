@@ -1,8 +1,14 @@
 
 { config, lib, pkgs, ... }:
 
+with builtins; with lib;
+let
+  extFilter = filter (strings.hasSuffix ".nix");
+  relativize = map (filename: (./. + "/configs-to-include/${filename}"));
+  configFiles = pipe (./. + "/configs-to-include") [toPath readDir attrNames extFilter relativize];
+in
 {
-  imports = [ "configs-to-include/*.nix" ];
+  imports = configFiles;
 
   nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
