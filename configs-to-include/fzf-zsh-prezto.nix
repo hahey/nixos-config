@@ -62,7 +62,7 @@
             return 1
         fi
         local venv_name
-        venv_name = $1
+        venv_name=$1
         [[ -n $1 ]] || venv_name=".venv"
         if [ -e $venv_name ] ; then
             echo "$venv_name already exists, aborting."
