@@ -9,6 +9,7 @@
 
   home.packages = with pkgs; [
     # system tools
+    file
     htop
     tree
     conky
@@ -37,8 +38,17 @@
     openssh
     sshpass
     wirelesstools
+    networkmanager-vpnc
+    networkmanager-openvpn
+
+    # securities
     gnupg
     pinentry-qt
+    tomb
+    cryptsetup
+    steghide
+    keepass
+    keepass-otpkeyprov
 
     # other applications
     wine
