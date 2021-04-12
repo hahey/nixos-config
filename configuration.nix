@@ -67,6 +67,13 @@
   services.printing.enable = true;
   services.printing.drivers = with pkgs; [ brlaser brgenml1cupswrapper brgenml1lpr ];
 
+  services.strongswan = {
+    enable = true;
+    secrets = [
+      "ipsec.d/ipsec.nm-l2tp.secrets"
+    ];
+  };
+
   # bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;

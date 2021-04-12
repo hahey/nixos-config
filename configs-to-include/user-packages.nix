@@ -38,7 +38,6 @@
     openssh
     sshpass
     wirelesstools
-    networkmanager-vpnc
     networkmanager-openvpn
 
     # securities
@@ -47,8 +46,7 @@
     tomb
     cryptsetup
     steghide
-    keepass
-    keepass-otpkeyprov
+    keepassxc
 
     # other applications
     wine
