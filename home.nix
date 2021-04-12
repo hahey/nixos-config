@@ -18,6 +18,6 @@ in
   services.gpg-agent = {
     enable = true;
     pinentryFlavor = "qt";
-    enableSSHSupport = true;
+    enableSshSupport = true;
   };
 }

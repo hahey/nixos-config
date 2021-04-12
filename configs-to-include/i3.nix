@@ -12,7 +12,7 @@
    config.bars = [ ];
    config.startup = [
      { command = "systemctl --user restart polybar"; always = true; notification = false; }
-     { command = "xrandr --output eDP --auto --right-of DisplayPort-2"; notification = false; }
+     { command = "xrandr --output eDP --primary --output DisplayPort-3 --left-of eDP --mode 1920x1080 --output DisplayPort-2 --auto --right-of eDP"; notification = false; }
      { command = "conky -d"; always = true; notification = false; }
      { command = "exec setxkbmap -layout us,de,kr -option grp:alt_space_toggle"; notification = false; }
      { command = "exec gpg-agent"; notification = false; }
@@ -124,14 +124,14 @@
     extraConfig = ''
             workspace 1 output eDP
             workspace 2 output DisplayPort-2
-            workspace 3 output eDP
-            workspace 4 output DisplayPort-2
-            workspace 5 output eDP
-            workspace 6 output DisplayPort-2
+            workspace 3 output DisplayPort-3
+            workspace 4 output eDP
+            workspace 5 output DisplayPort-2
+            workspace 6 output DisplayPort-3
             workspace 7 output eDP
             workspace 8 output DisplayPort-2
-            workspace 9 output eDP
-            workspace 10 output DisplayPort-2
+            workspace 9 output DisplayPort-3
+            workspace 10 output eDP
     '';
   };
 }

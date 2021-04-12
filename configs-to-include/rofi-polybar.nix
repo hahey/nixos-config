@@ -59,7 +59,7 @@ in
         font-3="Iosevka Nerd Font:style=Medium:size=16;3";
 
         # system setting
-        monitor = "eDP";
+        # monitor = "eDP";
         wm-name = "i3";
         enable-ipc=true;
 
