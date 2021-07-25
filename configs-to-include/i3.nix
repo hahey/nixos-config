@@ -12,7 +12,7 @@
    config.bars = [ ];
    config.startup = [
      { command = "systemctl --user restart polybar"; always = true; notification = false; }
-     { command = "xrandr --output eDP --primary --output DisplayPort-3 --left-of eDP --mode 1920x1080 --output DisplayPort-2 --auto --right-of eDP"; notification = false; }
+     { command = "xrandr --output eDP --primary --output DisplayPort-3 --left-of eDP --mode 1920x1080 --output DisplayPort-2 --auto --right-of eDP"; always = true; notification = false; }
      { command = "conky -d"; always = true; notification = false; }
      { command = "exec setxkbmap -layout us,de,kr -option grp:alt_space_toggle"; notification = false; }
      { command = "exec gpg-agent"; notification = false; }
