@@ -127,6 +127,8 @@
       }
 
       alias mkplay='make_ml_playground'
+
+      # export LD_LIBRARY_PATH="/nix/store/ai5054xzilz0q285c0ldabmkvhyyl6yq-glib-2.64.6/lib/:/nix/store/1waaha9ax2nr660y9iz5zpdg67r2sfzj-pango-1.45.5/lib/:/run/current-system/sw/lib/:/nix/var/nix/profiles/per-user/heuna/profile/lib/:/home/heuna/.nix-profile/lib/:$LD_LIBRARY_PATH"
       '';
   };
 }
