@@ -9,9 +9,9 @@ in
     font = "Terminus (TTF) 13";
     fullscreen = false;
     theme = "${external}/black-minimal.rasi";
-    extraConfig = ''
-      disable-history: false;
-    '';
+    extraConfig = {
+      disable-history = false;
+    };
   };
 
   services.polybar = with builtins; {

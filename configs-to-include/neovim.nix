@@ -16,8 +16,7 @@
     enable = true;
     vimAlias = true;
     viAlias = true;
-    configure = with builtins; {
-      customRC = ''
+    extraConfig = ''
         "basic setup
         set autoindent
         set smartindent
@@ -132,24 +131,21 @@
         map <f3> :call SetSpelllang("en_us")<cr>
         map <f4> :call SetSpelllang("de")<cr>
         '';
-        packages.myVimPackage = with pkgs.vimPlugins; {
-          start = [
-            vim-nix
-            nerdtree
-            vim-colorschemes
-            vim-airline
-            vim-airline-themes
-            syntastic
-            vim-fugitive
-            vim-indent-guides
-            vim-obsession
-            fzf-vim
-            vim-gitgutter
-            vim-easymotion
-            LanguageClient-neovim
-            YouCompleteMe
+      plugins = with pkgs.vimPlugins; [
+          vim-nix
+          nerdtree
+          vim-colorschemes
+          vim-airline
+          vim-airline-themes
+          syntastic
+          vim-fugitive
+          vim-indent-guides
+          vim-obsession
+          fzf-vim
+          vim-gitgutter
+          vim-easymotion
+          LanguageClient-neovim
+          YouCompleteMe
           ];
-        };
-      };
     };
 }

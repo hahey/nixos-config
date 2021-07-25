@@ -10,10 +10,12 @@
       ./hardware-configuration.nix
     ];
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = false;
+  # nixpkgs.config.allowBroken = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
 
@@ -48,7 +50,8 @@
 
   # enable AMD graphic
   hardware.opengl.enable = true;
-  hardware.opengl.extraPackages = [ pkgs.rocm-opencl-icd ];
+  hardware.opengl.extraPackages = with pkgs; [ rocm-opencl-icd rocm-opencl-runtime amdvlk driversi686Linux.amdvlk ];
+  hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
 
   # Enable the Plasma 5 Desktop Environment.
@@ -65,7 +68,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  services.printing.drivers = with pkgs; [ brlaser brgenml1cupswrapper brgenml1lpr ];
+  # services.printing.drivers = with pkgs; [ brlaser brgenml1cupswrapper brgenml1lpr ];
 
   services.strongswan = {
     enable = true;
@@ -96,7 +99,7 @@
   };
   nix.allowedUsers = [ "@wheel" ];
 
-  environment.systemPackages = [ pkgs.home-manager ];
+  environment.systemPackages = [ pkgs.plasma5Packages.baloo pkgs.home-manager ];
 
   services.udev.packages = [ pkgs.yubikey-personalization ];
   services.pcscd.enable = true;
@@ -122,8 +125,8 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
+  # system.autoUpgrade.enable = true;
+  # system.autoUpgrade.allowReboot = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -131,5 +134,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.09"; # Did you read the comment?
+  system.stateVersion = "21.05"; # Did you read the comment?
 }
