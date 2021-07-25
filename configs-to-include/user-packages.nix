@@ -4,7 +4,7 @@
 {
   programs.texlive = {
     enable = true;
-    extraPackages = (tpkgs: { inherit (tpkgs) scheme-medium paralist; });
+    extraPackages = (tpkgs: { inherit (tpkgs) scheme-medium paralist hyphenat wrapfig; });
   };
 
   home.packages = with pkgs; [
