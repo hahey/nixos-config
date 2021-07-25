@@ -16,14 +16,16 @@
     procps
     psmisc
     pavucontrol
-    appimage-run
+    (appimage-run.override {
+      extraPkgs = pkgs: [ pkgs.xorg.libxshmfence ];
+    })
 
     # git related
     gitAndTools.qgit
     tig
 
     # browsers
-    firefox-esr
+    firefox
     ungoogled-chromium
     google-chrome
 
@@ -44,24 +46,25 @@
     gnupg
     pinentry-qt
     tomb
-    cryptsetup
-    steghide
+    # cryptsetup
+    # steghide
     keepassxc
 
     # other applications
-    wine
+    playonlinux
     akregator
-    blender
+    # blender
     gimp
     musescore
     audacity
     betterlockscreen
 
-    # python
-    (python3.withPackages(ps: [
-      ps.python-language-server
-      ps.pyls-mypy ps.pyls-isort ps.pyls-black ps.flake8
-    ]))
+    python3
+    # (python3.withPackages(ps: [
+    # ps.pyls-mypy ps.pyls-isort ps.pyls-black ps.flake8
+    # ]))
+
+    transcribe
 
     # TODO: boostnote
   ];
