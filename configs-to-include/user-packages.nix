@@ -27,7 +27,7 @@
     # browsers
     firefox
     ungoogled-chromium
-    google-chrome
+    google-chrome-beta
 
     # pdf
     okular
@@ -41,6 +41,16 @@
     sshpass
     wirelesstools
     networkmanager-openvpn
+
+    # python
+    python3
+    # (python3.withPackages(ps: [
+    # ps.pyls-mypy ps.pyls-isort ps.pyls-black ps.flake8
+    # ]))
+
+    # c
+    gcc_latest
+    gnumake
 
     # securities
     gnupg
@@ -58,12 +68,6 @@
     musescore
     audacity
     betterlockscreen
-
-    python3
-    # (python3.withPackages(ps: [
-    # ps.pyls-mypy ps.pyls-isort ps.pyls-black ps.flake8
-    # ]))
-
     transcribe
 
     # TODO: boostnote

@@ -50,7 +50,7 @@
 
   # enable AMD graphic
   hardware.opengl.enable = true;
-  hardware.opengl.extraPackages = with pkgs; [ rocm-opencl-icd rocm-opencl-runtime amdvlk driversi686Linux.amdvlk ];
+    hardware.opengl.extraPackages = with pkgs; [ rocm-opencl-icd rocm-opencl-runtime ]; # amdvlk driversi686Linux.amdvlk ];
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
 
