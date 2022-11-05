@@ -42,7 +42,8 @@
         if has('gui_running')
             colorscheme solarized
         else
-            colorscheme bubblegum-256-dark
+            "colorscheme bubblegum-256-dark
+            colorscheme iceberg
             autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0
             let g:airline_theme='bubblegum'
         endif
@@ -134,7 +135,7 @@
       plugins = with pkgs.vimPlugins; [
           vim-nix
           nerdtree
-          vim-colorschemes
+          iceberg-vim
           vim-airline
           vim-airline-themes
           syntastic

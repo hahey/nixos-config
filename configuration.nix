@@ -2,19 +2,23 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
+{ config, pkgs, lib, ... }:
 {
+  # nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.packageOverrides = pkgs: {
+    steam = pkgs.steam.override { extraPkgs = pkgs: [pkgs.gnome2.GConf pkgs.mono 
+    pkgs.libva1 pkgs.libva1-minimal]; };
+  };
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
     ];
 
-  nixpkgs.config.allowUnfree = false;
-  # nixpkgs.config.allowBroken = true;
-
-  # Use the systemd-boot EFI boot loader.
+    # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
@@ -25,13 +29,6 @@
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.enp2s0.useDHCP = true;
-  networking.interfaces.wlp4s0.useDHCP = true;
-
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -39,7 +36,8 @@
   # Select internationalisation properties.
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    extraLocaleSettings = { LC_MESSAGES = "en_US.UTF-8"; LC_TIME = "de_DE.UTF-8"; };
+    supportedLocales = [ "all" ];
+    # extraLocaleSettings = { LC_MESSAGES = "en_US.UTF-8"; LC_TIME = "de_DE.UTF-8"; };
     inputMethod = {
       enabled = "ibus";
       ibus.engines = [ pkgs.ibus-engines.hangul ];
@@ -50,7 +48,7 @@
 
   # enable AMD graphic
   hardware.opengl.enable = true;
-    hardware.opengl.extraPackages = with pkgs; [ rocm-opencl-icd rocm-opencl-runtime ]; # amdvlk driversi686Linux.amdvlk ];
+  hardware.opengl.extraPackages = with pkgs; [ rocm-opencl-icd rocm-opencl-runtime amdvlk driversi686Linux.amdvlk ];
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
 
@@ -68,14 +66,10 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  # services.printing.drivers = with pkgs; [ brlaser brgenml1cupswrapper brgenml1lpr ];
-
-  services.strongswan = {
-    enable = true;
-    secrets = [
-      "ipsec.d/ipsec.nm-l2tp.secrets"
-    ];
-  };
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+   "brlaser" "brgenml1cupswrapper" "brgenml1lpr" "google-chrome" "transcribe" # ];
+  "steam-original" "steam" "steam-run"];
+  services.printing.drivers = with pkgs; [ brlaser brgenml1cupswrapper brgenml1lpr ];
 
   # bluetooth
   hardware.bluetooth.enable = true;
@@ -95,11 +89,34 @@
   users.users.USERTOREPLACE = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "networkmanager" "video"]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "video" "dialout"]; # Enable ‘sudo’ for the user.
   };
-  nix.allowedUsers = [ "@wheel" ];
+  nix.settings.allowed-users = [ "@wheel" ];
 
-  environment.systemPackages = [ pkgs.plasma5Packages.baloo pkgs.home-manager ];
+  home-manager.users.USERTOREPLACE =  { config, lib, pkgs, ... }:
+    with builtins; with lib;
+    let
+      extFilter = filter (strings.hasSuffix ".nix");
+      relativize = map (filename: ("/home/heuna/.config/nixpkgs/configs-to-include/${filename}"));
+      configFiles = pipe ("/home/heuna/.config/nixpkgs/configs-to-include") [toPath readDir attrNames extFilter relativize];
+    in
+    {
+    home.packages = [ pkgs.atool pkgs.httpie ];
+    home.username = "heuna";
+    home.homeDirectory = "/home/heuna";
+    fonts.fontconfig.enable = true;
+
+    imports = configFiles;
+    home.stateVersion = "22.11";
+    manual.manpages.enable = false;
+    programs.home-manager.enable = true;
+  };
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+  
+  environment.systemPackages = [pkgs.home-manager];
+
+  programs.steam.enable = true;
 
   services.udev.packages = [ pkgs.yubikey-personalization ];
   services.pcscd.enable = true;
@@ -107,10 +124,10 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
@@ -125,8 +142,8 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # system.autoUpgrade.enable = true;
-  # system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -134,5 +151,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05"; # Did you read the comment?
+  system.stateVersion = "22.11"; # Did you read the comment?
 }

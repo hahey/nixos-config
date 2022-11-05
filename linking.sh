@@ -13,7 +13,10 @@ NIXPKGSDIR=$HOME/.config/nixpkgs
 
 mkdir -p $NIXPKGSDIR
 
-for FD in home.nix configs-to-include external-config; do
+[[ ! -e $NIXPKGSDIR/home.nix ]] ||  rm "$NIXPKGSDIR/home.nix"
+ln -s "$PWD/home.nix" "$NIXPKGSDIR/home.nix"
+
+for FD in configs-to-include external-config; do
     [[ ! -e $NIXPKGSDIR/$FD ]] || rm -r $NIXPKGSDIR/$FD
     ln -s $PWD/$FD $NIXPKGSDIR/$FD
 done

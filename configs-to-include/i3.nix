@@ -11,9 +11,9 @@
    enable = true;
    config.bars = [ ];
    config.startup = [
-     { command = "systemctl --user restart polybar"; always = true; notification = false; }
-     { command = "xrandr --output eDP --primary --output DisplayPort-3 --left-of eDP --mode 1920x1080 --output DisplayPort-2 --auto --right-of eDP"; always = true; notification = false; }
-     { command = "conky -d"; always = true; notification = false; }
+     { command = "exec systemctl --user restart polybar"; always = true; notification = false; }
+     { command = "exec xrandr --output eDP --primary --output DisplayPort-3 --left-of eDP --mode 1920x1080 --output DisplayPort-2 --auto --right-of eDP"; always = true; notification = false; }
+     { command = "exec conky -d"; always = true; notification = false; }
      { command = "exec setxkbmap -layout us,de,kr -option grp:alt_space_toggle"; notification = false; }
      { command = "exec gpg-agent"; notification = false; }
      { command = "exec ibus-daemon --daemonize --xim"; notification = false; }
@@ -26,6 +26,7 @@
        "${modifier}+Return" = "exec ${terminal}";
        "${modifier}+Shift+q" = "kill";
        "${modifier}+d" = "exec ${menu}";
+       "${modifier}+x" = "exec bash /home/heuna/nixos-config/external-config/powermenu.sh";
 
        "${modifier}+h" = "focus left";
        "${modifier}+j" = "focus down";
@@ -112,7 +113,7 @@
           application = {
             "f" = "exec firefox";
             "b" = "exec appimage-run ~/Downloads/boost-note-linux.AppImage";
-            "g" = "exec google-chrome-beta";
+            "g" = "exec google-chrome-stable";
             "c" = "exec chromium";
             "p" = "exec pavucontrol";
 

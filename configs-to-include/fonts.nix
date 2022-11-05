@@ -4,7 +4,7 @@
 {
   home.packages = with pkgs; [
     # wm
-    font-awesome-ttf
+    font-awesome
     powerline-fonts
     siji
     iosevka

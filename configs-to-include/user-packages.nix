@@ -28,7 +28,7 @@
     # browsers
     firefox
     ungoogled-chromium
-    google-chrome-beta
+    google-chrome
 
     # pdf
     okular
@@ -45,8 +45,9 @@
 
     # python
     (python3.withPackages (ps: [
-    # ps.pyls-mypy ps.pyls-isort ps.pyls-black ps.flake8
-    pyserial
+    # ps.pyls-mypy ps.pyls-isort ps.pyls-black
+    ps.flake8
+    ps.pyserial
     ]))
 
     # c
@@ -62,7 +63,7 @@
     keepassxc
 
     # other applications
-    playonlinux
+    # playonlinux
     akregator
     # blender
     gimp
