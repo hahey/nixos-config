@@ -1,13 +1,12 @@
 { config, lib, pkgs, ... }:
 let
-  external = ".config/nixpkgs/external-config";
+  external = "/home/heuna/nixos-config/external-config";
 in
 {
 
   programs.rofi = {
     enable=true;
     font = "Terminus (TTF) 13";
-    fullscreen = false;
     theme = "${external}/black-minimal.rasi";
     extraConfig = {
       disable-history = false;
@@ -55,8 +54,8 @@ in
 
         font-0="Terminus (TTF):size=12;3";
         font-1="Siji:size=16;3";
-        font-2="Font Awesome 5 Free Solid:size=16;3";
-        font-3="Iosevka Nerd Font:style=Medium:size=16;3";
+        #font-1="Font Awesome 5 Free Solid:size=16;3";
+        font-2="Iosevka Nerd Font:style=Medium:size=16;3";
 
         # system setting
         # monitor = "eDP";
@@ -223,7 +222,7 @@ in
         type = "custom/text"; 
         content-padding = 2;
         content = "";
-        click-left = "~/${external}/powermenu.sh";
+        click-left = "bash ${external}/powermenu.sh";
       };
       "module/network" = {
         type = "internal/network";

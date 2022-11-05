@@ -61,16 +61,18 @@
 }
 #element {
   background-color:               @background;
-  text-color:                     @background-light;
+  text-color:                     @background;
   orientation:                    horizontal;
   border-radius:                  12px;
   padding:                        5px 10px 5px 10px;
 }
 #element-text {
-  font:                           "FantasqueSansMono Nerd Font Mono 20";
+  font:                           "FantasqueSansMono Nerd Font Mono 12";
   expand:                         true;
   horizontal-align:               0.5;
   vertical-align:                 0;
+  background-color:               @background;
+  text-color:                     @background-light;
 }
 #element normal.urgent,
 element alternate.urgent {
@@ -82,7 +84,7 @@ element alternate.urgent {
 #element normal.active,
 element alternate.active {
     background-color:             @on;
-    text-color:                   @background;
+    text-color:                   @foreground;
 }
 
 #element selected {
@@ -95,10 +97,10 @@ element alternate.active {
 
 #element selected.urgent {
     background-color:             @on;
-    text-color:                   @background;
+    text-color:                   @foreground;
 }
 
 #element selected.active {
     background-color:             @off;
-    color:                        @background;
+    color:                        @foreground;
 }
