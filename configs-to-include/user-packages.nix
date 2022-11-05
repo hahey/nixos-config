@@ -19,6 +19,7 @@
     (appimage-run.override {
       extraPkgs = pkgs: [ pkgs.xorg.libxshmfence ];
     })
+    zlib
 
     # git related
     gitAndTools.qgit
@@ -43,10 +44,10 @@
     networkmanager-openvpn
 
     # python
-    python3
-    # (python3.withPackages(ps: [
+    (python3.withPackages (ps: [
     # ps.pyls-mypy ps.pyls-isort ps.pyls-black ps.flake8
-    # ]))
+    pyserial
+    ]))
 
     # c
     gcc_latest
@@ -69,6 +70,8 @@
     audacity
     betterlockscreen
     transcribe
+    signal-desktop
+    arduino
 
     # TODO: boostnote
   ];

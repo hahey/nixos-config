@@ -112,7 +112,7 @@
           application = {
             "f" = "exec firefox";
             "b" = "exec appimage-run ~/Downloads/boost-note-linux.AppImage";
-            "g" = "exec google-chrome-stable";
+            "g" = "exec google-chrome-beta";
             "c" = "exec chromium";
             "p" = "exec pavucontrol";
 
